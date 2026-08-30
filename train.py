@@ -11,11 +11,9 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-# Suppress MLflow deprecation warnings
 warnings.filterwarnings("ignore")
 logging.getLogger("mlflow").setLevel(logging.ERROR)
 
-# Fix all random seeds for perfect reproducibility
 SEED = 42
 np.random.seed(SEED)
 random.seed(SEED)
@@ -46,7 +44,7 @@ def train():
         
         val_acc = accuracy_score(y_test, mlp.predict(X_test))
         
-        # Log all required metadata for Question 4
+
         mlflow.log_param("seed", SEED)
         mlflow.log_param("git_commit", os.environ.get("GIT_COMMIT", "unknown"))
         mlflow.log_param("dvc_dataset_hash", os.environ.get("DVC_HASH", "unknown"))
@@ -54,7 +52,7 @@ def train():
         mlflow.log_metric("val_accuracy", val_acc)
         mlflow.log_metric("training_time", training_time)
         
-        # Log and implicitly register the model
+
         mlflow.sklearn.log_model(
             mlp, 
             "model", 

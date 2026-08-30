@@ -2,8 +2,6 @@
 
 This repository demonstrates end-to-end reproducibility using MLflow and DVC as part of the DA3408 Assignment 1 Capstone.
 
-## Phase 1: Partner A Setup (Preparation)
-If you are Partner A, run these commands to set up the repository, generate the data, push it to S3, and train the initial model.
 
 ### 1. Initialize the Repository
 ```bash
@@ -14,7 +12,7 @@ dvc init
 ### 2. Generate and Version the Dataset
 ```bash
 python generate_data.py
-dvc remote add -d myremote s3://<YOUR-BUCKET-NAME>/q4-data
+dvc remote add -d myremote s3://aseel-da3408-dvc-820298843056-eu-north-1-an/q4-data
 dvc add dataset.csv
 ```
 
@@ -44,9 +42,6 @@ python train.py
 ---
 
 ## Phase 2: Partner B Reproduction
-If you are Partner B, your goal is to perfectly reproduce Partner A's result. 
-
-**Rules:** Do not communicate with Partner A about their environment or data. Use only the exact commands below.
 
 ### 1. Clone the Code
 ```bash
@@ -56,7 +51,7 @@ git checkout <partner_a_commit_hash>
 ```
 
 ### 2. Export S3 Credentials
-Ask Partner A to securely provide their AWS keys so you can pull the dataset:
+
 ```bash
 export AWS_ACCESS_KEY_ID="<provided_by_partner_a>"
 export AWS_SECRET_ACCESS_KEY="<provided_by_partner_a>"
@@ -71,10 +66,10 @@ dvc checkout
 
 ### 4. Create the Environment
 ```bash
-mamba env create -f environment.yml
-mamba activate da13
+conda env create -f environment.yml
+conda activate da13
 ```
-*(Note: If you do not have mamba installed, use `conda env create -f environment.yml`)*
+
 
 ### 5. Reproduce the Run
 ```bash
@@ -84,7 +79,6 @@ python train.py
 ```
 
 ### 6. Verify and Log
-1. Open MLflow (`mlflow ui --backend-store-uri sqlite:///q4_mlflow.db --port 5001`).
-2. Verify that your Validation Accuracy perfectly matches Partner A's run.
-3. Open the run details in the UI and add the following Note:
-   > "Reproduced by Partner B: Metric match = Yes"
+```bash 
+mlflow ui --backend-store-uri sqlite:///q4_mlflow.db --port 5001```
+
