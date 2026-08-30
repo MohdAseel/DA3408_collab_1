@@ -1,0 +1,4 @@
+[core]
+    remote = myremote
+['remote "myremote"']
+    url = s3://aseel-da3408-dvc-820298843056-eu-north-1-an/q4-data
