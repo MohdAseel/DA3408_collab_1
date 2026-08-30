@@ -35,8 +35,8 @@ python train.py
 *(This logs the metrics, seed, Git commit hash, and DVC artifact hash to MLflow).*
 
 ### 5. Transition to Staging
-1. Start the MLflow UI: `mlflow ui --backend-store-uri sqlite:///q4_mlflow.db`
-2. Open `http://127.0.0.1:5000` in your browser.
+1. Start the MLflow UI on a new port: `mlflow ui --backend-store-uri sqlite:///q4_mlflow.db --port 5001`
+2. Open `http://127.0.0.1:5001` in your browser.
 3. Click the **Models** tab at the top.
 4. Click on **Capstone_Final_Model**, click its latest version, and change its stage to **Staging**.
 5. Push your final code changes to GitHub.
@@ -84,7 +84,7 @@ python train.py
 ```
 
 ### 6. Verify and Log
-1. Open MLflow (`mlflow ui --backend-store-uri sqlite:///q4_mlflow.db`).
+1. Open MLflow (`mlflow ui --backend-store-uri sqlite:///q4_mlflow.db --port 5001`).
 2. Verify that your Validation Accuracy perfectly matches Partner A's run.
 3. Open the run details in the UI and add the following Note:
    > "Reproduced by Partner B: Metric match = Yes"

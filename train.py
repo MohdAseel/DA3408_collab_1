@@ -3,12 +3,17 @@ import numpy as np
 import random
 import time
 import os
-import argparse
+import warnings
+import logging
 import mlflow
 import mlflow.sklearn
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+
+# Suppress MLflow deprecation warnings
+warnings.filterwarnings("ignore")
+logging.getLogger("mlflow").setLevel(logging.ERROR)
 
 # Fix all random seeds for perfect reproducibility
 SEED = 42
